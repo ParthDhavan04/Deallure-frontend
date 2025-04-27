@@ -4,6 +4,7 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Landing from "./components/Landing/Landing";
 import Home from "./components/Home/Home";
+import ProductTracking from "./components/Products/Products";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/products" element={<ProductTracking />} />
         </Routes>
       </div>
     </Router>
