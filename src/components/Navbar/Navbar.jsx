@@ -33,121 +33,21 @@ const Navbar = () => {
     window.location.href = "/";
   };
 
-  // SVG Logo component with responsive sizing
-  const DeallureLogo = ({ className = "" }) => (
-    <svg className={`h-8 md:h-10 w-auto ${className}`} viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8b5cf6" />
-          <stop offset="100%" stopColor="#ec4899" />
-        </linearGradient>
-        
-        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#8b5cf6" floodOpacity="0.5"/>
-        </filter>
-      </defs>
-      
-      {/* Price tag icon */}
-      <g filter="url(#shadow)">
-        <path 
-          d="M60 25a25 25 0 100 50 25 25 0 000-50zm0 45a20 20 0 110-40 20 20 0 010 40z" 
-          fill="url(#logoGradient)"
-        />
-        
-        {/* Dollar sign */}
-        <path 
-          d="M60 35v4a8 8 0 00-6 13.5A8 8 0 0060 65v4M60 35a8 8 0 018 8 8 8 0 01-8 8M60 35v16M60 45v5"
-          stroke="url(#logoGradient)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        
-        {/* Downward arrow for price drop */}
-        <path 
-          d="M90 35l-5 10 5 10" 
-          stroke="url(#logoGradient)" 
-          strokeWidth="3" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-        />
-        
-        {/* Notification bell */}
-        <path 
-          d="M35 40a5 5 0 00-5 5v5l-5 5v2.5h30V55l-5-5v-5a5 5 0 00-5-5" 
-          stroke="url(#logoGradient)"
-          strokeWidth="2.5"
-          fill="none"
-        />
-        <path 
-          d="M40 60v2.5a5 5 0 01-10 0V60" 
-          stroke="url(#logoGradient)"
-          strokeWidth="2.5"
-          fill="none"
-        />
-      </g>
-      
-      {/* Text - visible on larger screens via CSS */}
-      <g className="logo-text">
-        <text x="105" y="60" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="30" fill="url(#logoGradient)" filter="url(#shadow)">Deallure</text>
-        <text x="105" y="75" fontFamily="Arial, sans-serif" fontSize="12" fill="#a78bfa">Price Tracker</text>
-      </g>
-    </svg>
-  );
+const DeallureLogo = ({ className = "" }) => (
+  <img
+    src="/src/assets/Deallure-Logo.png"
+    alt="Deallure Logo"
+    className={`h-8 md:h-10 w-auto ${className}`}
+  />
+);
 
-  // Small logo for mobile devices
-  const DeallureSmallLogo = ({ className = "" }) => (
-    <svg className={`h-8 w-auto ${className}`} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="smallLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8b5cf6" />
-          <stop offset="100%" stopColor="#ec4899" />
-        </linearGradient>
-        
-        <filter id="smallShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#8b5cf6" floodOpacity="0.5"/>
-        </filter>
-      </defs>
-      
-      {/* Price tag icon */}
-      <g filter="url(#smallShadow)">
-        <path 
-          d="M50 25a25 25 0 100 50 25 25 0 000-50zm0 45a20 20 0 110-40 20 20 0 010 40z" 
-          fill="url(#smallLogoGradient)"
-        />
-        
-        {/* Dollar sign */}
-        <path 
-          d="M50 35v4a8 8 0 00-6 13.5A8 8 0 0050 65v4M50 35a8 8 0 018 8 8 8 0 01-8 8M50 35v16M50 45v5"
-          stroke="url(#smallLogoGradient)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        
-        {/* Downward arrow */}
-        <path 
-          d="M75 40l-5 10 5 10" 
-          stroke="url(#smallLogoGradient)" 
-          strokeWidth="3" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-        />
-        
-        {/* Notification bell */}
-        <path 
-          d="M25 40a5 5 0 00-5 5v5l-5 5v2.5h30V55l-5-5v-5a5 5 0 00-5-5" 
-          stroke="url(#smallLogoGradient)"
-          strokeWidth="2.5"
-          fill="none"
-        />
-        <path 
-          d="M30 60v2.5a5 5 0 01-10 0V60" 
-          stroke="url(#smallLogoGradient)"
-          strokeWidth="2.5"
-          fill="none"
-        />
-      </g>
-    </svg>
-  );
+const DeallureSmallLogo = ({ className = "" }) => (
+  <img
+    src="/src/assets/Deallure-Logo.png"
+    alt="Deallure Logo Small"
+    className={`h-8 w-auto ${className}`}
+  />
+);
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
