@@ -33,7 +33,7 @@ const Landing = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-      <Navbar /> {/* ✅ Navbar stays at the top */}
+      <Navbar /> 
 
       {/* Enhanced Hero Section with Animated Elements */}
       <div className="flex flex-col items-center justify-center flex-grow px-4 pt-16 overflow-hidden">
@@ -162,7 +162,7 @@ const Landing = () => {
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg md:text-xl">SRS</div>
                 <div className="ml-3 md:ml-4">
                   <h3 className="font-medium text-purple-300 text-sm md:text-base">Sairanjan Subudhi</h3>
-                  <p className="text-gray-400 text-xs md:text-sm">F1 Enthusiast</p>
+                  <p className="text-gray-400 text-xs md:text-sm">Happy Customer</p>
                 </div>
               </div>
               <p className="text-gray-300 italic text-sm md:text-base">

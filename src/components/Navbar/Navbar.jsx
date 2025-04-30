@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link as ScrollLink } from 'react-scroll';
+
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -102,8 +104,18 @@ const DeallureSmallLogo = ({ className = "" }) => (
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
                           </svg>
+                          Add Product Info
+                        </Link>
+                        <Link
+                          to="/products"
+                          className="flex items-center px-4 py-2 text-sm text-purple-200 hover:bg-purple-600/50 hover:text-white transition-colors duration-150 rounded-md mx-1"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                           <path fillRule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.243 4.243a1 1 0 01-1.414 1.414l-4.243-4.243zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clipRule="evenodd" />
+                          </svg>
                           Track Your Product
                         </Link>
+
                         <div className="px-4 py-2 text-xs text-purple-300 border-t border-gray-700/50 mt-1">
                           More features coming soon...
                         </div>
@@ -113,17 +125,26 @@ const DeallureSmallLogo = ({ className = "" }) => (
                 </AnimatePresence>
               </div>
 
-              <Link to="/pricing" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
+              <Link to="/subscription" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 Subscriptions
               </Link>
               
-              <Link to="/testimonials" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
+              {/* <Link to="/testimonials" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 Testimonials
-              </Link>
-              
-              <a href="#about-me" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
+              </Link> */}
+              <ScrollLink
+                to="testimonials"
+                smooth={true}
+                duration={600}
+                offset={-80} // Adjust based on fixed navbar height
+                className="cursor-pointer px-4 py-2 text-white hover:text-purple-300 transition"
+              >
+                Testimonials
+              </ScrollLink>
+
+              <Link to="/about" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 About Us
-              </a>
+              </Link>
               
               <Link to="/contact" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 Contact
