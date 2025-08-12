@@ -14,19 +14,91 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [validationErrors, setValidationErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateName = (name) => {
+    return !/\d/.test(name);
+  };
+
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasMinLength = password.length >= 8;
+    
+    if (!hasUpperCase) return "Password must contain at least one uppercase letter";
+    if (!hasLowerCase) return "Password must contain at least one lowercase letter";
+    if (!hasMinLength) return "Password must be at least 8 characters long";
+    
+    return "";
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Clear validation errors as user types
+    setValidationErrors({
+      ...validationErrors,
+      [name]: "",
+    });
+  };
+
+  const validateForm = () => {
+    const errors = {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    };
+    let isValid = true;
+
+    // Validate name (no digits)
+    if (!validateName(formData.name)) {
+      errors.name = "Name should not contain numbers";
+      isValid = false;
+    }
+
+    // Validate email
+    if (!validateEmail(formData.email)) {
+      errors.email = "Please enter a valid email address";
+      isValid = false;
+    }
+
+    // Validate password
+    const passwordError = validatePassword(formData.password);
+    if (passwordError) {
+      errors.password = passwordError;
+      isValid = false;
+    }
+
+    // Validate confirm password
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+      isValid = false;
+    }
+
+    setValidationErrors(errors);
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+    
+    // Form validation
+    if (!validateForm()) {
       return;
     }
   
@@ -66,6 +138,30 @@ const Signup = () => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const getPasswordStrength = (password) => {
+    if (!password) return "";
+    
+    let strength = 0;
+    if (password.length >= 8) strength += 1;
+    if (/[A-Z]/.test(password)) strength += 1;
+    if (/[a-z]/.test(password)) strength += 1;
+    if (/[0-9]/.test(password)) strength += 1;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+    
+    if (strength < 2) return "Weak";
+    if (strength < 4) return "Medium";
+    return "Strong";
+  };
+
+  const getPasswordStrengthColor = (strength) => {
+    switch (strength) {
+      case "Weak": return "text-red-400";
+      case "Medium": return "text-yellow-300";
+      case "Strong": return "text-green-400";
+      default: return "";
     }
   };
 
@@ -139,10 +235,34 @@ const Signup = () => {
 
         <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           {[
-            { label: "Full Name", name: "name", type: "text", placeholder: "John Doe" },
-            { label: "Email Address", name: "email", type: "email", placeholder: "name@example.com" },
-            { label: "Password", name: "password", type: "password", placeholder: "••••••••" },
-            { label: "Confirm Password", name: "confirmPassword", type: "password", placeholder: "••••••••" },
+            { 
+              label: "Full Name", 
+              name: "name", 
+              type: "text", 
+              placeholder: "John Doe", 
+              error: validationErrors.name 
+            },
+            { 
+              label: "Email Address", 
+              name: "email", 
+              type: "email", 
+              placeholder: "name@example.com", 
+              error: validationErrors.email 
+            },
+            { 
+              label: "Password", 
+              name: "password", 
+              type: "password", 
+              placeholder: "••••••••", 
+              error: validationErrors.password 
+            },
+            { 
+              label: "Confirm Password", 
+              name: "confirmPassword", 
+              type: "password", 
+              placeholder: "••••••••", 
+              error: validationErrors.confirmPassword 
+            },
           ].map((input, index) => (
             <motion.div 
               className="space-y-1"
@@ -163,6 +283,17 @@ const Signup = () => {
                   onChange={handleChange}
                   required
                 />
+                {input.error && (
+                  <p className="mt-1 text-xs text-red-300">{input.error}</p>
+                )}
+                {input.name === "password" && formData.password && (
+                  <div className="mt-1 flex items-center">
+                    <span className="text-xs mr-2">Strength:</span>
+                    <span className={`text-xs ${getPasswordStrengthColor(getPasswordStrength(formData.password))}`}>
+                      {getPasswordStrength(formData.password)}
+                    </span>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

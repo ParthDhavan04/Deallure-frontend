@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link as ScrollLink } from 'react-scroll';
-
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -128,19 +126,6 @@ const DeallureSmallLogo = ({ className = "" }) => (
               <Link to="/subscription" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 Subscriptions
               </Link>
-              
-              {/* <Link to="/testimonials" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
-                Testimonials
-              </Link> */}
-              <ScrollLink
-                to="testimonials"
-                smooth={true}
-                duration={600}
-                offset={-80} // Adjust based on fixed navbar height
-                className="cursor-pointer px-4 py-2 text-white hover:text-purple-300 transition"
-              >
-                Testimonials
-              </ScrollLink>
 
               <Link to="/about" className="text-purple-200 hover:text-purple-400 px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors duration-300">
                 About Us
@@ -248,10 +233,6 @@ const DeallureSmallLogo = ({ className = "" }) => (
               
               <Link to="/pricing" className="text-purple-200 hover:bg-purple-600/20 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                 Subscriptions
-              </Link>
-              
-              <Link to="/testimonials" className="text-purple-200 hover:bg-purple-600/20 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                Testimonials
               </Link>
               
               <a href="#about-me" className="text-purple-200 hover:bg-purple-600/20 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
